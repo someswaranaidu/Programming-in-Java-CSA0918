@@ -1,0 +1,47 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class LuckyGuess {
+    public LuckyGuess() {
+    }
+
+    public static void main(String[] args) {
+        Random random = new Random();
+        int luckyNumber = random.nextInt(10) + 1;
+        Scanner scanner = new Scanner(System.in);
+
+        int guess;
+        do {
+            System.out.print("Enter your guess (1-10): ");
+
+            while(!scanner.hasNextInt()) {
+                System.out.print("Invalid input. Please enter a number: ");
+                scanner.nextLine();
+            }
+
+            guess = scanner.nextInt();
+        } while(guess < 1 || guess > 10);
+
+        switch (guess) {
+            case 1:
+                if (luckyNumber != 1 && luckyNumber != 7) {
+                    System.out.println("Sorry, unlucky this time. The lucky number was " + luckyNumber);
+                } else {
+                    System.out.println("Lucky guess!");
+                }
+                break;
+            case 3:
+            case 9:
+                System.out.println("Lucky guess!");
+                break;
+            default:
+                System.out.println("Sorry, unlucky this time. The lucky number was " + luckyNumber);
+        }
+
+        System.out.print("Play again? (y/n): ");
+        if (scanner.next().equalsIgnoreCase("y")) {
+            main(args);
+        }
+
+    }
+}
